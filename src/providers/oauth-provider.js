@@ -10,6 +10,7 @@ var defaults = {
   baseUrl: null,
   clientId: null,
   clientSecret: null,
+  grantType: null,
   grantPath: '/oauth2/token',
   revokePath: '/oauth2/revoke'
 };
@@ -18,7 +19,8 @@ var requiredKeys = [
   'baseUrl',
   'clientId',
   'grantPath',
-  'revokePath'
+  'revokePath',
+  'grantType'
 ];
 
 /**
@@ -123,7 +125,7 @@ function OAuthProvider() {
       getAccessToken(data, options) {
         data = angular.extend({
           client_id: this.config.clientId,
-          grant_type: 'password'
+          grant_type: this.config.grantType
         }, data);
 
         if (null !== this.config.clientSecret) {
